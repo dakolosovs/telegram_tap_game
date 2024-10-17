@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тапалка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        #tapButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            font-size: 20px;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="tapCount">Тапов: 0</h1>
+    <button id="tapButton">Тап!</button>
+
+    <script>
+        let tapCount = 0;
+
+        document.getElementById('tapButton').onclick = function() {
+            tapCount++;
+            document.getElementById('tapCount').innerText = "Тапов: " + tapCount;
+
+            // Отправляем данные о тапах в бота
+            fetch(`https://api.telegram.org/bot7890231739:AAHs37BKoUtk4cnZnF1-_IZjE0JzRuwJuVE/sendMessage?chat_id=393215352&text=Тапов: ${tapCount}`)
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Ошибка при отправке сообщения');
+                    }
+                });
+        };
+    </script>
+</body>
+</html>
